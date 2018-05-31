@@ -5,7 +5,7 @@ from .settings import api_settings
 from .utils import get_cache_key
 
 
-class CachedSerializerMixin(serializers.ModelSerializer):
+class CachedModelSerializer(serializers.ModelSerializer):
     _cache_timeout = api_settings.DEFAULT_CACHE_TIMEOUT
 
     def _get_cache_key(self, instance):
@@ -23,6 +23,6 @@ class CachedSerializerMixin(serializers.ModelSerializer):
         if cached:
             return cached
 
-        result = super(CachedSerializerMixin, self).to_representation(instance)
+        result = super(CachedModelSerializer, self).to_representation(instance)
         cache.set(key, result, self._cache_timeout)
         return result
