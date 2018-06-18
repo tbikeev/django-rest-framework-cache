@@ -15,7 +15,7 @@ class CacheRegistry:
         After the serializer is registered we must connect the signals that
         clear the instance cache.
         """
-        model = serializer._meta.model
+        model = serializer.Meta.model
 
         if model not in self._registry:
             self._registry[model] = []
