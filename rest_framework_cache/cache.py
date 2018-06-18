@@ -13,7 +13,7 @@ try:
     cache_backend = api_settings.DEFAULT_CACHE_BACKEND
     if cache_backend != "default":
         cache = caches[cache_backend]
-    if is_test_environment:
+    if is_test_environment():
         cache = init_dummy_cache()
 except KeyError:
     raise ImproperlyConfigured("'{}' is a invalid CACHE_BACKEND".format(
